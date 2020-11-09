@@ -18,6 +18,13 @@ function itemsFetchDataSuccess(items) {
     };
 }
 
+function itemsFetchHeadlineSuccess(items) {
+    return {
+        type: 'HeadlineSUCCESS',
+        items: items
+    };
+}
+
 export function itemsFetchData(url) {
     return (dispatch) => {
         dispatch(itemsIsLoading());
@@ -28,6 +35,21 @@ export function itemsFetchData(url) {
             .then((response) => response.json())
             .then((items) => {
                 dispatch(itemsFetchDataSuccess(items))})
+            .catch(() => {
+                dispatch(itemsHasErrored())});
+            };
+}
+
+export function itemsFetchHeadline(url) {
+    return (dispatch) => {
+        dispatch(itemsIsLoading());
+        
+        fetch(url, {
+            credentials: 'omit',
+        })
+            .then((response) => response.json())
+            .then((items) => {
+                dispatch(itemsFetchHeadlineSuccess(items.articles))})
             .catch(() => {
                 dispatch(itemsHasErrored())});
             };

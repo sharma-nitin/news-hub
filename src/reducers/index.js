@@ -1,7 +1,8 @@
-import { LOADING, SUCCESS, ERROR, COUNTRY_CHANGED, CATEGORY_CHANGED, PAGE_CHANGED } from '../constants/constants';
+import { LOADING, SUCCESS,HeadlineSUCCESS, ERROR, PAGE_CHANGED } from '../constants/constants';
 
 const init = {
 	data: [],
+	headlines:[],
 	statusCode:'200',
 	status: 'initial',
 	activePage: 1,
@@ -13,6 +14,8 @@ export default (state = init, action) => {
 			return {...state,status:"loading"}
 		case SUCCESS:
 			return {...state,status:"success", data: action.items}
+		case HeadlineSUCCESS:
+			return {...state,status:"success", headlines: action.items}
 		case ERROR :
 			return {...state,status:"error", statusCode: action.statusCode}
 		case PAGE_CHANGED :

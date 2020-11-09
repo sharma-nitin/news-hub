@@ -3,13 +3,17 @@ import { connect } from 'react-redux';
 import { Image, Container, Menu } from 'semantic-ui-react';
 import errImg from './nonews.png';
 import { URL, PAGE_SIZE } from './constants/constants';
-import { itemsFetchData, changePage } from './actions';
+import { itemsFetchData, changePage,itemsFetchHeadline } from './actions';
 import Main from './components/Main';
 import './App.css';
 
-class App extends Component { 
+class App extends Component {  
+
   componentDidMount() {
     this.props.fetchData(URL+"&pageSize="+PAGE_SIZE
+    +"&page="+this.props.activePage+"&apiKey=5f98a99c08c34b8ea53baa592aad5114")
+
+    this.props.fetchHeadline(URL+"&pageSize="+3
     +"&page="+this.props.activePage+"&apiKey=5f98a99c08c34b8ea53baa592aad5114")
   }
 
@@ -25,11 +29,9 @@ class App extends Component {
     if(this.props.status!=="error") {
       return (
       <div>
-        <Menu fluid stackable inverted color="teal">
-          <Container>
-            <Menu.Item as='a' href=" " header className="title">
-              News Hub
-            </Menu.Item>
+        <Menu >
+          <Container className="center">
+            <p className="heading">News Hub</p>
           </Container>
         </Menu>
         <Main />
@@ -62,7 +64,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changePage: (activePage) => dispatch(changePage(activePage)),
-    fetchData: (url) => dispatch(itemsFetchData(url))
+    fetchData: (url) => dispatch(itemsFetchData(url)),
+    fetchHeadline: (url) => dispatch(itemsFetchHeadline(url)),
   };
 };
 

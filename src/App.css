@@ -19,6 +19,16 @@
   color: white;
 }
 
+.heading{
+    font-size: 60px;
+    color: crimson;
+}
+
+.center{
+  justify-content: center;
+  align-items: center;
+}
+
 .App-link {
   color: #61dafb;
 }
