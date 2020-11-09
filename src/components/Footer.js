@@ -9,7 +9,7 @@ class Footer extends Component {
             <Grid divided inverted stackable centered>
               <Grid.Row textAlign="center">
               	<Grid.Column as="a" href="https://newsapi.org/" textAlign="center">
-	              	<Header as="h3" color="blue">Powered By AFour Tech</Header>
+	              	<Header as="h3" color="blue">Powered By Newsapi.org</Header>
 	              </Grid.Column>
               </Grid.Row>
             </Grid>
