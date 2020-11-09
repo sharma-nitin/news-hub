@@ -11,16 +11,16 @@ class App extends Component {
 
   componentDidMount() {
     this.props.fetchData(URL+"&pageSize="+PAGE_SIZE
-    +"&page="+this.props.activePage+"&apiKey=5f98a99c08c34b8ea53baa592aad5114")
+    +"&page="+this.props.activePage+"&apiKey=d1d633d73e734ea6824f0168b50f3d38")
 
     this.props.fetchHeadline(URL+"&pageSize="+3
-    +"&page="+this.props.activePage+"&apiKey=5f98a99c08c34b8ea53baa592aad5114")
+    +"&page="+this.props.activePage+"&apiKey=d1d633d73e734ea6824f0168b50f3d38")
   }
 
   componentDidUpdate(prevProps) {
     if(this.props.activePage!==prevProps.activePage) {
         this.props.fetchData(URL+"&pageSize="+PAGE_SIZE
-        +"&page="+this.props.activePage+"&apiKey=5f98a99c08c34b8ea53baa592aad5114")
+        +"&page="+this.props.activePage+"&apiKey=d1d633d73e734ea6824f0168b50f3d38")
     }
   }
 
