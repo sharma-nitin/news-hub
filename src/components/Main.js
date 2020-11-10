@@ -3,13 +3,20 @@ import { connect } from 'react-redux';
 import { List, Image, Dimmer, Loader, Pagination, Grid, Segment, Card } from 'semantic-ui-react';
 import Footer from './Footer';
 import { PAGE_SIZE } from '../constants/constants';
-import { changePage } from '../actions';
+import { changePage, itemsFetchData, setSearchValue } from '../actions';
+import { DebounceInput } from 'react-debounce-input';
+
 import './Main.css'
 
 class Main extends Component {
 
+	handlesearchChange(e) {
+		const value = e.target.value;
+		this.props.setSearch(value);
+	}
+
 	render() {
-		const { data, headline, status } = this.props;
+		const { data, headline, status, searchValue } = this.props;
 		if (status === "loading")
 			return (
 				<Dimmer active>
@@ -34,6 +41,14 @@ class Main extends Component {
 						</Grid.Column>
 
 						<Grid.Column>
+							<DebounceInput
+						    	className="search-box"
+								minLength={2}
+								debounceTimeout={500}
+								placeholder="search for top stories"
+								value={searchValue}
+								onChange={e =>  this.handlesearchChange(e)} />
+								
 							<Segment className="stories-segment">
 								<p className="top-stories">Top Stories</p>
 								{data && data.articles && data.articles.map((elem, index) => (
@@ -44,7 +59,7 @@ class Main extends Component {
 												<List.Description>
 													{elem.description}
 													<p>
-													-{elem.author}, {new Date(elem.publishedAt).toLocaleString()}
+														-{elem.author}, {new Date(elem.publishedAt).toLocaleString()}
 													</p>
 												</List.Description>
 											</List.Content>
@@ -81,6 +96,7 @@ const mapStateToProps = (state) => {
 		activePage: state.activePage,
 		data: state.data,
 		headline: state.headlines,
+		searchValue: state.searchValue,
 		status: state.status,
 	};
 };
@@ -88,6 +104,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		changePage: (activePage) => dispatch(changePage(activePage)),
+		fetchData: (url) => dispatch(itemsFetchData(url)),
+		setSearch: (value) => dispatch(setSearchValue(value)),
 	};
 };
 

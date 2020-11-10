@@ -15,13 +15,20 @@ function itemsFetchDataSuccess(items) {
     return {
         type: 'SUCCESS',
         items: items
-    };
+    }; 
 }
 
 function itemsFetchHeadlineSuccess(items) {
     return {
         type: 'HeadlineSUCCESS',
         items: items
+    };
+}
+
+export function setSearchValue(value) {
+    return {
+        type: 'searchValue',
+        payload: value
     };
 }
 

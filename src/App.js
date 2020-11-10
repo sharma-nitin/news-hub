@@ -10,16 +10,18 @@ import './App.css';
 class App extends Component {  
 
   componentDidMount() {
-    this.props.fetchData(URL+"&pageSize="+PAGE_SIZE
+    this.props.fetchData(URL+"&q="+this.props.searchValue +"&pageSize="+PAGE_SIZE
     +"&page="+this.props.activePage+"&apiKey=d1d633d73e734ea6824f0168b50f3d38")
 
-    this.props.fetchHeadline(URL+"&pageSize="+3
+    this.props.fetchHeadline(URL+"&q="+this.props.searchValue +"&pageSize="+3
     +"&page="+this.props.activePage+"&apiKey=d1d633d73e734ea6824f0168b50f3d38")
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.activePage!==prevProps.activePage) {
-        this.props.fetchData(URL+"&pageSize="+PAGE_SIZE
+    if(this.props.activePage!==prevProps.activePage ||
+      this.props.searchValue!==prevProps.searchValue
+      ) {
+        this.props.fetchData(URL+"&q="+this.props.searchValue +"&pageSize="+PAGE_SIZE
         +"&page="+this.props.activePage+"&apiKey=d1d633d73e734ea6824f0168b50f3d38")
     }
   }
@@ -32,6 +34,7 @@ class App extends Component {
         <Menu >
           <Container className="center">
             <p className="heading">News Hub</p>
+           
           </Container>
         </Menu>
         <Main />
@@ -57,7 +60,8 @@ const mapStateToProps = (state) => {
   return {
     status: state.status,
     totalResults: state.data.totalResults,
-    activePage: state.activePage
+    activePage: state.activePage,
+    searchValue: state.searchValue
   };
 };
 
