@@ -68,6 +68,8 @@ class Main extends Component {
 								))
 								}
 
+								{data && data.articles && data.articles.length === 0 ? <p>No Top stories found. Please modify your search</p> : null}
+
 							</Segment>
 							<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 								<Pagination
